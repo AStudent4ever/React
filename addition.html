@@ -13,39 +13,6 @@
             
             function App() {
 
-                const [state, steState] = React.useState({
-                    num1: 1,
-                    num2: 4,
-                    Response: ""
-                });
-
-                return (
-                    <div>
-                        <div>{state.num1} + {state.num2}</div>
-                        <input value={state.response} />
-                    </div>
-                );
-            }
-
-            ReactDOM.render(<App />, document.querySelector("#app"));
-        </script>
-    </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-        <title>Hello</title>
-    </head>
-    <body>
-        <div id="app"></div>
-
-        <script type="text/babel">
-            
-            function App() {
-
                 const [count, setCount] = React.useState(0)
                 
                 function updateCount() {
