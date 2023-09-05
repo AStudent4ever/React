@@ -22,7 +22,7 @@
                 return (
                     <div>
                         <div>{state.num1} + {state.num2}</div>
-                        <input value={state.response} />
+                        <input onChange={updateResponse} value={state.response} />
                     </div>
                 );
             }
