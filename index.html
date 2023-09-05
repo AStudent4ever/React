@@ -1,94 +1,185 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-        <title>Hello</title>
-    </head>
-    <body>
-        <div id="app"></div>
-
-        <script type="text/babel">
-            
-            function App() {
-    var _React$useState = React.useState({
-        num1: 1,
-        num2: 1,
-        response: "",
-        score: 0,
-        incorrect: false
-    }),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        state = _React$useState2[0],
-        setState = _React$useState2[1];
-
-    function renderWinScreen() {
-        return React.createElement(
-            "div",
-            { id: "winner" },
-            "You won!"
-        );
-    }
-
-    function inputKeyPress(event) {
-        if (event.key === "Enter") {
-            var answer = parseInt(state.response);
-            if (answer === state.num1 + state.num2) {
-                // User got question right
-                setState(_extends({}, state, {
-                    score: state.score + 1,
-                    response: "",
-                    num1: Math.ceil(Math.random() * 10),
-                    num2: Math.ceil(Math.random() * 10),
-                    incorrect: false
-                }));
-            } else {
-                // User got question wrong
-                setState(_extends({}, state, {
-                    score: state.score - 1,
-                    response: "",
-                    incorrect: true
-                }));
-            }
+<html lang="en"><head>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin=""></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin=""></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        #app {
+            text-align: center;
+            font-family: sans-serif;
         }
-    }
 
-    function updateResponse(event) {
-        setState(_extends({}, state, {
-            response: event.target.value
-        }));
-    }
+        #problem {
+            font-size: 72px;
+        }
 
-    function renderProblem() {
-        return React.createElement(
-            "div",
-            null,
-            React.createElement(
-                "div",
-                { className: state.incorrect ? "incorrect" : "", id: "problem" },
-                state.num1,
-                " + ",
-                state.num2
-            ),
-            React.createElement("input", { onKeyPress: inputKeyPress, onChange: updateResponse, autoFocus: true, value: state.response }),
-            React.createElement(
-                "div",
-                null,
-                "Score: ",
-                state.score
-            )
-        );
-    }
+        #winner {
+            font-size: 72px;
+            color: green;
+        }
 
-    if (state.score === 10) {
-        return renderWinScreen();
-    } else {
-        return renderProblem();
+        .incorrect {
+            color: red;
+        }
+    </style>
+    <title>Counter</title>
+<script>"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function App() {
+var _React$useState = React.useState({
+    num1: 1,
+    num2: 1,
+    response: "",
+    score: 0,
+    incorrect: false
+}),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    state = _React$useState2[0],
+    setState = _React$useState2[1];
+
+function renderWinScreen() {
+    return React.createElement(
+        "div",
+        { id: "winner" },
+        "You won!"
+    );
+}
+
+function inputKeyPress(event) {
+    if (event.key === "Enter") {
+        var answer = parseInt(state.response);
+        if (answer === state.num1 + state.num2) {
+            // User got question right
+            setState(_extends({}, state, {
+                score: state.score + 1,
+                response: "",
+                num1: Math.ceil(Math.random() * 10),
+                num2: Math.ceil(Math.random() * 10),
+                incorrect: false
+            }));
+        } else {
+            // User got question wrong
+            setState(_extends({}, state, {
+                score: state.score - 1,
+                response: "",
+                incorrect: true
+            }));
+        }
     }
 }
 
-            ReactDOM.render(<App />, document.querySelector("#app"));
-        </script>
-    </body>
-</html>
+function updateResponse(event) {
+    setState(_extends({}, state, {
+        response: event.target.value
+    }));
+}
+
+function renderProblem() {
+    return React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "div",
+            { className: state.incorrect ? "incorrect" : "", id: "problem" },
+            state.num1,
+            " + ",
+            state.num2
+        ),
+        React.createElement("input", { onKeyPress: inputKeyPress, onChange: updateResponse, autoFocus: true, value: state.response }),
+        React.createElement(
+            "div",
+            null,
+            "Score: ",
+            state.score
+        )
+    );
+}
+
+if (state.score === 10) {
+    return renderWinScreen();
+} else {
+    return renderProblem();
+}
+}
+
+ReactDOM.render(React.createElement(App, null), document.querySelector("#app"));
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIklubGluZSBCYWJlbCBzY3JpcHQiXSwibmFtZXMiOlsiQXBwIiwiUmVhY3QiLCJ1c2VTdGF0ZSIsIm51bTEiLCJudW0yIiwicmVzcG9uc2UiLCJzY29yZSIsImluY29ycmVjdCIsInN0YXRlIiwic2V0U3RhdGUiLCJyZW5kZXJXaW5TY3JlZW4iLCJpbnB1dEtleVByZXNzIiwiZXZlbnQiLCJrZXkiLCJhbnN3ZXIiLCJwYXJzZUludCIsIk1hdGgiLCJjZWlsIiwicmFuZG9tIiwidXBkYXRlUmVzcG9uc2UiLCJ0YXJnZXQiLCJ2YWx1ZSIsInJlbmRlclByb2JsZW0iLCJSZWFjdERPTSIsInJlbmRlciIsImRvY3VtZW50IiwicXVlcnlTZWxlY3RvciJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBRVksU0FBU0EsR0FBVCxHQUFlO0FBQUEsMEJBRWVDLE1BQU1DLFFBQU4sQ0FBZTtBQUNyQ0MsY0FBTSxDQUQrQjtBQUVyQ0MsY0FBTSxDQUYrQjtBQUdyQ0Msa0JBQVUsRUFIMkI7QUFJckNDLGVBQU8sQ0FKOEI7QUFLckNDLG1CQUFXO0FBTDBCLEtBQWYsQ0FGZjtBQUFBO0FBQUEsUUFFSkMsS0FGSTtBQUFBLFFBRUdDLFFBRkg7O0FBVVgsYUFBU0MsZUFBVCxHQUEyQjtBQUN2QixlQUNJO0FBQUE7QUFBQSxjQUFLLElBQUcsUUFBUjtBQUFBO0FBQUEsU0FESjtBQUdIOztBQUVELGFBQVNDLGFBQVQsQ0FBdUJDLEtBQXZCLEVBQThCO0FBQzFCLFlBQUlBLE1BQU1DLEdBQU4sS0FBYyxPQUFsQixFQUEyQjtBQUN2QixnQkFBTUMsU0FBU0MsU0FBU1AsTUFBTUgsUUFBZixDQUFmO0FBQ0EsZ0JBQUlTLFdBQVdOLE1BQU1MLElBQU4sR0FBYUssTUFBTUosSUFBbEMsRUFBd0M7QUFDcEM7QUFDQUssc0NBQ09ELEtBRFA7QUFFSUYsMkJBQU9FLE1BQU1GLEtBQU4sR0FBYyxDQUZ6QjtBQUdJRCw4QkFBVSxFQUhkO0FBSUlGLDBCQUFNYSxLQUFLQyxJQUFMLENBQVVELEtBQUtFLE1BQUwsS0FBZ0IsRUFBMUIsQ0FKVjtBQUtJZCwwQkFBTVksS0FBS0MsSUFBTCxDQUFVRCxLQUFLRSxNQUFMLEtBQWdCLEVBQTFCLENBTFY7QUFNSVgsK0JBQVc7QUFOZjtBQVFILGFBVkQsTUFVTztBQUNIO0FBQ0FFLHNDQUNPRCxLQURQO0FBRUlGLDJCQUFPRSxNQUFNRixLQUFOLEdBQWMsQ0FGekI7QUFHSUQsOEJBQVUsRUFIZDtBQUlJRSwrQkFBVztBQUpmO0FBTUg7QUFDSjtBQUNKOztBQUVELGFBQVNZLGNBQVQsQ0FBd0JQLEtBQXhCLEVBQStCO0FBQzNCSCw4QkFDT0QsS0FEUDtBQUVJSCxzQkFBVU8sTUFBTVEsTUFBTixDQUFhQztBQUYzQjtBQUlIOztBQUVELGFBQVNDLGFBQVQsR0FBeUI7QUFDckIsZUFDSTtBQUFBO0FBQUE7QUFDSTtBQUFBO0FBQUEsa0JBQUssV0FBV2QsTUFBTUQsU0FBTixHQUFrQixXQUFsQixHQUFnQyxFQUFoRCxFQUFvRCxJQUFHLFNBQXZEO0FBQ0tDLHNCQUFNTCxJQURYO0FBQUE7QUFDb0JLLHNCQUFNSjtBQUQxQixhQURKO0FBSUksMkNBQU8sWUFBWU8sYUFBbkIsRUFBa0MsVUFBVVEsY0FBNUMsRUFBNEQsV0FBVyxJQUF2RSxFQUE2RSxPQUFPWCxNQUFNSCxRQUExRixHQUpKO0FBS0k7QUFBQTtBQUFBO0FBQUE7QUFBYUcsc0JBQU1GO0FBQW5CO0FBTEosU0FESjtBQVNIOztBQUVELFFBQUlFLE1BQU1GLEtBQU4sS0FBZ0IsRUFBcEIsRUFBd0I7QUFDcEIsZUFBT0ksaUJBQVA7QUFDSCxLQUZELE1BRU87QUFDSCxlQUFPWSxlQUFQO0FBQ0g7QUFDSjs7QUFFREMsU0FBU0MsTUFBVCxDQUFnQixvQkFBQyxHQUFELE9BQWhCLEVBQXlCQyxTQUFTQyxhQUFULENBQXVCLE1BQXZCLENBQXpCIiwiZmlsZSI6IklubGluZSBCYWJlbCBzY3JpcHQiLCJzb3VyY2VzQ29udGVudCI6WyJcblxuICAgICAgICAgICAgZnVuY3Rpb24gQXBwKCkge1xuXG4gICAgICAgICAgICAgICAgY29uc3QgW3N0YXRlLCBzZXRTdGF0ZV0gPSBSZWFjdC51c2VTdGF0ZSh7XG4gICAgICAgICAgICAgICAgICAgIG51bTE6IDEsXG4gICAgICAgICAgICAgICAgICAgIG51bTI6IDEsXG4gICAgICAgICAgICAgICAgICAgIHJlc3BvbnNlOiBcIlwiLFxuICAgICAgICAgICAgICAgICAgICBzY29yZTogMCxcbiAgICAgICAgICAgICAgICAgICAgaW5jb3JyZWN0OiBmYWxzZVxuICAgICAgICAgICAgICAgIH0pO1xuXG4gICAgICAgICAgICAgICAgZnVuY3Rpb24gcmVuZGVyV2luU2NyZWVuKCkge1xuICAgICAgICAgICAgICAgICAgICByZXR1cm4gKFxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBpZD1cIndpbm5lclwiPllvdSB3b24hPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICAgICAgZnVuY3Rpb24gaW5wdXRLZXlQcmVzcyhldmVudCkge1xuICAgICAgICAgICAgICAgICAgICBpZiAoZXZlbnQua2V5ID09PSBcIkVudGVyXCIpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGFuc3dlciA9IHBhcnNlSW50KHN0YXRlLnJlc3BvbnNlKTtcbiAgICAgICAgICAgICAgICAgICAgICAgIGlmIChhbnN3ZXIgPT09IHN0YXRlLm51bTEgKyBzdGF0ZS5udW0yKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gVXNlciBnb3QgcXVlc3Rpb24gcmlnaHRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzZXRTdGF0ZSh7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC4uLnN0YXRlLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzY29yZTogc3RhdGUuc2NvcmUgKyAxLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXNwb25zZTogXCJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbnVtMTogTWF0aC5jZWlsKE1hdGgucmFuZG9tKCkgKiAxMCksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG51bTI6IE1hdGguY2VpbChNYXRoLnJhbmRvbSgpICogMTApLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbmNvcnJlY3Q6IGZhbHNlXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfSk7XG4gICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIFVzZXIgZ290IHF1ZXN0aW9uIHdyb25nXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgc2V0U3RhdGUoe1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuLi5zdGF0ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2NvcmU6IHN0YXRlLnNjb3JlIC0gMSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVzcG9uc2U6IFwiXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGluY29ycmVjdDogdHJ1ZVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICB9XG5cbiAgICAgICAgICAgICAgICBmdW5jdGlvbiB1cGRhdGVSZXNwb25zZShldmVudCkge1xuICAgICAgICAgICAgICAgICAgICBzZXRTdGF0ZSh7XG4gICAgICAgICAgICAgICAgICAgICAgICAuLi5zdGF0ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIHJlc3BvbnNlOiBldmVudC50YXJnZXQudmFsdWVcbiAgICAgICAgICAgICAgICAgICAgfSk7XG4gICAgICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICAgICAgZnVuY3Rpb24gcmVuZGVyUHJvYmxlbSgpIHtcbiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIChcbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9e3N0YXRlLmluY29ycmVjdCA/IFwiaW5jb3JyZWN0XCIgOiBcIlwifSBpZD1cInByb2JsZW1cIj5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAge3N0YXRlLm51bTF9ICsge3N0YXRlLm51bTJ9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGlucHV0IG9uS2V5UHJlc3M9e2lucHV0S2V5UHJlc3N9IG9uQ2hhbmdlPXt1cGRhdGVSZXNwb25zZX0gYXV0b0ZvY3VzPXt0cnVlfSB2YWx1ZT17c3RhdGUucmVzcG9uc2V9IC8+XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj5TY29yZToge3N0YXRlLnNjb3JlfTwvZGl2PlxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICB9XG5cbiAgICAgICAgICAgICAgICBpZiAoc3RhdGUuc2NvcmUgPT09IDEwKSB7XG4gICAgICAgICAgICAgICAgICAgIHJldHVybiByZW5kZXJXaW5TY3JlZW4oKTtcbiAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICByZXR1cm4gcmVuZGVyUHJvYmxlbSgpO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgUmVhY3RET00ucmVuZGVyKDxBcHAgLz4sIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIjYXBwXCIpKTtcbiAgICAgICAgIl19</script></head>
+<body>
+    <div id="app"><div><div class="" id="problem">1 + 1</div><input value=""><div>Score: 0</div></div></div>
+
+    <script type="text/babel">
+
+        function App() {
+
+            const [state, setState] = React.useState({
+                num1: 1,
+                num2: 1,
+                response: "",
+                score: 0,
+                incorrect: false
+            });
+
+            function renderWinScreen() {
+                return (
+                    <div id="winner">You won!</div>
+                );
+            }
+
+            function inputKeyPress(event) {
+                if (event.key === "Enter") {
+                    const answer = parseInt(state.response);
+                    if (answer === state.num1 + state.num2) {
+                        // User got question right
+                        setState({
+                            ...state,
+                            score: state.score + 1,
+                            response: "",
+                            num1: Math.ceil(Math.random() * 10),
+                            num2: Math.ceil(Math.random() * 10),
+                            incorrect: false
+                        });
+                    } else {
+                        // User got question wrong
+                        setState({
+                            ...state,
+                            score: state.score - 1,
+                            response: "",
+                            incorrect: true
+                        })
+                    }
+                }
+            }
+
+            function updateResponse(event) {
+                setState({
+                    ...state,
+                    response: event.target.value
+                });
+            }
+
+            function renderProblem() {
+                return (
+                    <div>
+                        <div className={state.incorrect ? "incorrect" : ""} id="problem">
+                            {state.num1} + {state.num2}
+                        </div>
+                        <input onKeyPress={inputKeyPress} onChange={updateResponse} autoFocus={true} value={state.response} />
+                        <div>Score: {state.score}</div>
+                    </div>
+                )
+            }
+
+            if (state.score === 10) {
+                return renderWinScreen();
+            } else {
+                return renderProblem();
+            }
+        }
+
+        ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+
+</body></html>
