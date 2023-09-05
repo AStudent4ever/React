@@ -16,9 +16,21 @@
                 const [state, steState] = React.useState({
                     num1: 1,
                     num2: 4,
-                    Response: ""
+                    Response: "",
+                    score: 0
+
                 });
 
+                function inputKeyPress(event) {
+                    if (event.key === "Enter") {
+                        const answer = parseInt(state.response);
+                        if (state.num1 + state.num2 === answer) {
+                        } else {
+
+                        }
+                    }
+                }
+                
                 function updateResponse(event) {
                     setState({
                         ...state,
@@ -26,12 +38,11 @@
                     });
                 }
 
-                
-                
                 return (
                     <div>
                         <div>{state.num1} + {state.num2}</div>
-                        <input onChange={updateResponse} value={state.response} />
+                        <input onKeyPress={inputKeyPress} onChange={updateResponse} value={state.response} />
+                        <div>Score: {state.score}</div>
                     </div>
                 );
             }
