@@ -19,6 +19,15 @@
                     Response: ""
                 });
 
+                function updateResponse(event) {
+                    setState({
+                        ...state,
+                        response: event.target.value
+                    });
+                }
+
+                
+                
                 return (
                     <div>
                         <div>{state.num1} + {state.num2}</div>
