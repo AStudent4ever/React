@@ -10,10 +10,15 @@
         <div id="app"></div>
 
         <script type="text/babel">
+            
             function App() {
+
+                const [count, setCount] = React.useState(0)
+                
                 return (
                     <div>
-                        Hello!
+                        <div>{count}</div>
+                        <button onClick={updateCount}>Count</button>
                     </div>
                 );
             }
