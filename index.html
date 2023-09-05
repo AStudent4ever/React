@@ -25,8 +25,17 @@
                     if (event.key === "Enter") {
                         const answer = parseInt(state.response);
                         if (state.num1 + state.num2 === answer) {
+                            setState({
+                                ...state,
+                                score: state.score +1
+                            });    
+                        
+                        
                         } else {
-
+                            setState({
+                                ...state,
+                                score: state.score -1
+                            });
                         }
                     }
                 }
