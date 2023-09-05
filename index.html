@@ -12,48 +12,81 @@
         <script type="text/babel">
             
             function App() {
+    var _React$useState = React.useState({
+        num1: 1,
+        num2: 1,
+        response: "",
+        score: 0,
+        incorrect: false
+    }),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        state = _React$useState2[0],
+        setState = _React$useState2[1];
 
-                const [state, steState] = React.useState({
-                    num1: 1,
-                    num2: 4,
-                    Response: "",
-                    score: 0
+    function renderWinScreen() {
+        return React.createElement(
+            "div",
+            { id: "winner" },
+            "You won!"
+        );
+    }
 
-                });
-
-                function inputKeyPress(event) {
-                    if (event.key === "Enter") {
-                        const answer = parseInt(state.response);
-                        if (state.num1 + state.num2 === answer) {
-                            setState({
-                                ...state,
-                                score: state.score +1
-                            });    
-                        
-                        
-                        } else {
-                            setState({
-                                ...state,
-                                score: state.score -1
-                            });
-                        }
-                    }
-                }
-                function updateResponse(event) {
-                    setState({
-                        ...state,
-                        response: event.target.value
-                    });
-                }
-
-                return (
-                    <div>
-                        <div>{state.num1} + {state.num2}</div>
-                        <input onKeyPress={inputKeyPress} onChange={updateResponse} value={state.response} />
-                        <div>Score: {state.score}</div>
-                    </div>
-                );
+    function inputKeyPress(event) {
+        if (event.key === "Enter") {
+            var answer = parseInt(state.response);
+            if (answer === state.num1 + state.num2) {
+                // User got question right
+                setState(_extends({}, state, {
+                    score: state.score + 1,
+                    response: "",
+                    num1: Math.ceil(Math.random() * 10),
+                    num2: Math.ceil(Math.random() * 10),
+                    incorrect: false
+                }));
+            } else {
+                // User got question wrong
+                setState(_extends({}, state, {
+                    score: state.score - 1,
+                    response: "",
+                    incorrect: true
+                }));
             }
+        }
+    }
+
+    function updateResponse(event) {
+        setState(_extends({}, state, {
+            response: event.target.value
+        }));
+    }
+
+    function renderProblem() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(
+                "div",
+                { className: state.incorrect ? "incorrect" : "", id: "problem" },
+                state.num1,
+                " + ",
+                state.num2
+            ),
+            React.createElement("input", { onKeyPress: inputKeyPress, onChange: updateResponse, autoFocus: true, value: state.response }),
+            React.createElement(
+                "div",
+                null,
+                "Score: ",
+                state.score
+            )
+        );
+    }
+
+    if (state.score === 10) {
+        return renderWinScreen();
+    } else {
+        return renderProblem();
+    }
+}
 
             ReactDOM.render(<App />, document.querySelector("#app"));
         </script>
