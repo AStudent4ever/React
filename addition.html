@@ -15,13 +15,14 @@
 
                 const [state, steState] = React.useState({
                     num1: 1,
-                    num2: 2
+                    num2: 4,
+                    Response: ""
                 });
 
                 return (
                     <div>
                         <div>{state.num1} + {state.num2}</div>
-                        <input />
+                        <input value={state.response} />
                     </div>
                 );
             }
